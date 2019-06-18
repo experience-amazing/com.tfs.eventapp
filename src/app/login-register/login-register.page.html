@@ -1,0 +1,143 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>loginRegister</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<ion-header>
+  	<ion-toolbar text-center>
+    	<ion-grid no-padding padding-left padding-right>
+    	  	<ion-row>
+    		    <ion-col col-12 class="logo-img margin-top-5" padding-left text-center>
+    		    	<img alt="logo" height="40" src="assets/imgs/tfs_logo.png" >
+    		    </ion-col>    		    
+    	  	</ion-row>
+    		<ion-row no-padding>
+    			<ion-col col-12 class="center-margin">
+	    	    	<ion-segment color="dark" [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+		    	    	<ion-segment-button value="Login">
+	    	    	      	<ion-label>Login</ion-label>
+		    	    	</ion-segment-button>
+	    	    	    <ion-segment-button value="Register">
+	    	    	      	<ion-label>Register</ion-label>
+	    	    	    </ion-segment-button>
+	    	    	</ion-segment>
+    			</ion-col>
+    		</ion-row>
+    	</ion-grid>
+  	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-row class="full-height-percentage">
+		<ion-col col-lg-12 col-sm-12 no-padding class="full-height-percentage">
+			<div *ngIf="selectedSegment=='Login'" class="full-height">
+				<div class="m-section-dark full-height">
+					<div class="m-card full-height opaque-background">
+						<ion-row>
+							<!-- <ion-col col-xl-4 col-lg-6 col-sm-12 offset-xl-4 offset-lg-3 text-center> -->
+								<form class="full-width" [formGroup]="loginform" #formLoginDir="ngForm">
+									<div class="form-control">
+										<!-- <ion-label floating>Username*</ion-label> -->
+    									<!-- <ion-input type="text"></ion-input> -->
+									    <label color="primary" stacked>Username<sup>*</sup></label>
+									    <input type="text" formControlName="username" placeholder="Username" mode="wp" required="">
+
+		    	            			<div class="error-msg" *ngIf="loginform.controls['username'].hasError('required') && validateLogin">
+											Please enter a Username
+										</div>
+								    </div>
+									<!-- </ion-item> -->
+
+									<!-- <ion-item mode="wp"> -->
+									<div class="form-control">
+										<!-- <ion-label floating>Password*</ion-label> -->
+    									<!-- <ion-input type="text"></ion-input> -->
+											<label color="primary" stacked>Password<sup>*</sup></label>
+											<!-- <ion-icon name="information-circle" tooltipe="test"></ion-icon> -->
+									    <input type="password" formControlName="password" placeholder="Password" mode="wp" required>
+				                    	<div class="error-msg" *ngIf="loginform.controls['password'].hasError('required') && validateLogin">
+				                    		Please enter a Password	
+				                    	</div>
+				                    	<div class="error-msg" *ngIf="!loginform.controls['password'].hasError('required') && loginform.controls['password'].hasError('pattern') && validateLogin">
+				                    		Please enter the Password in correct format
+				                    	</div>
+								    </div>
+									<!-- </ion-item> -->
+									<ion-button color="primary" expand="block" size="large" class="margin-top-40" (click)="initiateLogin()">Login</ion-button>
+									<!-- <button ion-button block class="btn btn-primary margin-top-40" (click)="initiateLogin()">Login</button> -->
+								</form>
+							<!-- </ion-col> -->
+						</ion-row>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="selectedSegment=='Register'" class="full-height">
+				<div class="m-section-dark full-height">
+					<div class="m-card full-height opaque-background">
+						<ion-row>
+							<form class="full-width" [formGroup]="registerform" #formRegisterDir="ngForm">
+								<div class="form-control">
+								    <label color="primary" stacked>Username<sup>*</sup></label>
+								    <input type="text" formControlName="username" placeholder="Username" mode="wp" required="">
+
+	    	            			<div class="error-msg" *ngIf="registerform.controls['username'].hasError('required') && validateRegister">
+										Please enter a Username
+									</div>
+							    </div>
+								<!-- </ion-item> -->
+
+								<!-- <ion-item mode="wp"> -->
+								<div class="form-control">
+									<label color="primary" stacked>Password<sup>*</sup></label>
+								    <input type="password" formControlName="password" placeholder="Password" mode="wp" required>
+			                    	<div class="error-msg" *ngIf="registerform.controls['password'].hasError('required') && validateRegister">
+			                    		Please enter a Password	
+			                    	</div>
+			                    	<div class="error-msg" *ngIf="!registerform.controls['password'].hasError('required') && registerform.controls['password'].hasError('pattern') && validateRegister">
+			                    		Please enter the Password in correct format
+			                    	</div>
+							    </div>
+
+							    <div class="form-control">
+									<label color="primary" stacked>Email<sup>*</sup></label>
+								    <input type="text" formControlName="email" placeholder="Email" mode="wp" required>
+			                    	<div class="error-msg" *ngIf="registerform.controls['email'].hasError('required') && validateRegister">
+			                    		Please enter a Password	
+			                    	</div>
+			                    	<div class="error-msg" *ngIf="!registerform.controls['email'].hasError('required') && registerform.controls['email'].hasError('email') && validateRegister">
+			                    		Please enter the Email in correct format
+			                    	</div>
+							    </div>
+
+							    <div class="form-control">
+									<label color="primary" stacked>Phone<sup>*</sup></label>
+								    <input type="text" formControlName="phone" placeholder="Phone No" mode="wp" required>
+			                    	<div class="error-msg" *ngIf="registerform.controls['phone'].hasError('required') && validateRegister">
+			                    		Please enter a Phone No	
+			                    	</div>
+			                    	<div class="error-msg" *ngIf="!registerform.controls['phone'].hasError('required') && registerform.controls['phone'].hasError('pattern') && validateRegister">
+			                    		Please enter the Phone No in correct format
+			                    	</div>
+							    </div>
+
+							    <div class="form-control">
+									<label color="primary" stacked>Security Code<sup>*</sup></label>
+								    <input type="text" formControlName="phone" placeholder="Security Code" mode="wp" required>
+			                    	<div class="error-msg" *ngIf="registerform.controls['securityCode'].hasError('required') && validateRegister">
+			                    		Please enter the Security Code
+			                    	</div>
+							    </div>
+
+								<ion-button color="primary" expand="block" size="large" class="margin-top-40" (click)="initiateRegister()">Register</ion-button>
+								<!-- <button ion-button block class="btn btn-primary margin-top-40" (click)="initiateLogin()">Login</button> -->
+							</form>
+						</ion-row>
+					</div>
+				</div>
+			</div>
+		</ion-col>
+	</ion-row>
+</ion-content>
