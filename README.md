@@ -2,8 +2,8 @@
 
 Env Settings:
 
-- npm config set proxy http://tms%40Cusername:password@tfsproxy.tfs.toyota.com:9090
-- npm config set https-proxy http://tms%40Cusername:password@tfsproxy.tfs.toyota.com:9090 
+- npm config set proxy http://tms%40Cusername:password@internal.yourproxy.com:9090
+- npm config set https-proxy http://tms%40Cusername:password@internal.yourproxy.com.com:9090 
 
 - aa@aa aa%40aa
 
